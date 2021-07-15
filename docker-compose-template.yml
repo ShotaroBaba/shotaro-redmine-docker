@@ -1,0 +1,37 @@
+version: '3.1'
+
+services:
+
+  redmine:
+    image: redmine:latest
+    restart: unless-stopped
+    # You can change your exposed port and ip based on your need
+    ports:
+      - '127.0.0.1:8080:3000'
+    links:
+      - db
+    container_name: 'redmine-web'
+    environment:
+      REDMINE_DB_USERNAME: redmine
+      REDMINE_DB_DATABASE: redmine-db
+      REDMINE_DB_PASSWORD: ___REDMINE_DB_PASSWORD___
+      REDMINE_SECRET_KEY_BASE: ___REDMINE_SECRET_KEY___
+    depends_on: 
+      - db
+    volumes:
+      - ./redmine_data:/usr/src/redmine/files
+  db:
+    image: mysql:5.7
+    restart: unless-stopped
+    container_name: 'redmine-db'
+    environment:
+      MYSQL_ROOT_PASSWORD: ___MYSQL_ROOT_PASSWORD___
+      MYSQL_PASSWORD: ___REDMINE_DB_PASSWORD___
+      MYSQL_DATABASE: redmine-db
+      MYSQL_USER: redmine
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+      - ./logs/mysql:/var/log/mysql
+      - ./test_data:/test_data
+      - ./.mysql_secrets:/.mysql_secrets
+      

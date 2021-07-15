@@ -1,0 +1,7 @@
+docker-compose.yml
+.mysql_secrets
+data
+logs
+redmine_data
+test_data
+*.yaml
