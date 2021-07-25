@@ -1,6 +1,6 @@
 version: '3.1'
 
-# Your suggested admin password when logging into redmine web client:
+# You can change the default redmine admin password using the below password:
 # Login ID: admin
 # Suggested password: ___WEB_CLIENT_PASSWORD___
 
