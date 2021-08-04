@@ -18,17 +18,21 @@ services:
     environment:
       REDMINE_DB_USERNAME: redmine
       REDMINE_DB_DATABASE: redmine-db
+      # The password below will change.
       REDMINE_DB_PASSWORD: ___REDMINE_DB_PASSWORD___
       REDMINE_SECRET_KEY_BASE: ___REDMINE_SECRET_KEY___
     depends_on: 
       - db
     volumes:
       - ./redmine_data:/usr/src/redmine/files
+
+  # MySQL database for storing a redmine data.
   db:
     image: mysql:5.7
     restart: unless-stopped
     container_name: 'redmine-db'
     environment:
+      # The template password will be changed by the script.
       MYSQL_ROOT_PASSWORD: ___MYSQL_ROOT_PASSWORD___
       MYSQL_PASSWORD: ___REDMINE_DB_PASSWORD___
       MYSQL_DATABASE: redmine-db
