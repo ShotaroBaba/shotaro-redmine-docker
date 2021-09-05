@@ -11,6 +11,6 @@ web_client_password=$(tr -dc A-Za-z0-9 </dev/urandom | head -c $num_pass_char ; 
 
 # Replace the string with generated passwords.
 cat docker-compose-template.yml | sed "s/___REDMINE_DB_PASSWORD___/$redmine_db_password/g" | \
-sed "s/___REDMINE_SECRET_KEY___/$redmine_secret_key/g" |
-sed "s/___WEB_CLIENT_PASSWORD___/$web_client_password/g" |
+sed "s/___REDMINE_SECRET_KEY___/$redmine_secret_key/g" | \
+sed "s/___WEB_CLIENT_PASSWORD___/$web_client_password/g" | \
 sed "s/___MYSQL_ROOT_PASSWORD___/$mysql_root_password/g" > docker-compose.yml
